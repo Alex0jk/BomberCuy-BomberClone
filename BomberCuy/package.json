@@ -1,0 +1,17 @@
+{
+  "name": "bomber_cuy",
+  "version": "1.0.0",
+  "description": "juego como bomberman",
+  "main": "main.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+      "start": "electron ."
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^4.0.2"
+  }
+}
