@@ -1359,8 +1359,15 @@ function Sprite(pInst, _x, _y, _w, _h) {
       //self destruction countdown
       if (this.life>0)
         this.life--;
-      if (this.life === 0)
+      if (this.life === 0){
         this.remove();
+        if(typeof(this.onLiveIsOver) ==='function'){
+          this.onLiveIsOver.call(this, this);
+        }
+        else{
+          console.log('Warning: onLiveIsOver should be a function');
+        }
+      }
     }
   };//end update
 

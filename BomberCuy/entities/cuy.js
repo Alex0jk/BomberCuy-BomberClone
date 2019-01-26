@@ -12,7 +12,9 @@ class Cuy{
         this.player.addAnimation('left','assets/cuy_sprites/tile003.png','assets/cuy_sprites/tile004.png','assets/cuy_sprites/tile005.png');
         this.player.addAnimation('right','assets/cuy_sprites/tile006.png','assets/cuy_sprites/tile007.png','assets/cuy_sprites/tile008.png');
         this.player.addAnimation('up','assets/cuy_sprites/tile009.png','assets/cuy_sprites/tile010.png','assets/cuy_sprites/tile011.png');
-        this.plased_bomb=false;
+        //power up
+        has_powerup = false;
+
     }
     player_movement(){
         if (keyCode == RIGHT_ARROW) {
@@ -32,6 +34,14 @@ class Cuy{
             this.player.changeAnimation('up');
         }
     }
+    player_bomb(){    
+        if(key=='z'){
+            if(plased_bomb==false){
+                this.bomb=new Bomb(this.player.position.x,this.player.position.y);
+            }
+        }
+    }
+    
     check_movement(){
         if((keyWentUp(RIGHT_ARROW)||keyWentUp(DOWN_ARROW)||keyWentUp(LEFT_ARROW)||keyWentUp(UP_ARROW))
             &&!(keyDown(RIGHT_ARROW)||keyDown(DOWN_ARROW)||keyDown(LEFT_ARROW)||keyDown(UP_ARROW))){           
@@ -51,9 +61,15 @@ class Cuy{
         }
     }
     check_collision(){
-        this.player.collide(wallTop);
-        this.player.collide(wallBottom);
-        this.player.collide(wallLeft);
-        this.player.collide(wallRight);
+        this.player.collide(wallTopU);
+        this.player.collide(wallBottomU);
+        this.player.collide(wallLeftU);
+        this.player.collide(wallRightU);
+    }
+    check_explotion(){
+        if(this.player.overlap(explosions)){
+            this.player.position.x = 50;
+            this.player.position.y = 50;
+        }
     }
 }
