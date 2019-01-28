@@ -3,7 +3,16 @@ class Enemy {
     constructor(range_x, range_y) {
         this.enemy = createSprite(random(range_x),
             random(range_y), 50, 50);
-        this.enemy.shapeColor = color(255);
+        this.enemy.addAnimation('normal', 'assets/snake_sprites/tile_idle_f.png');
+        this.enemy.addAnimation('idle_left', 'assets/snake_sprites/tile_idle_l.png');
+        this.enemy.addAnimation('idle_right', 'assets/snake_sprites/tile_idle_r.png');
+        this.enemy.addAnimation('idle_up', 'assets/snake_sprites/tile_idle_b.png');
+
+        this.enemy.addAnimation('down', 'assets/snake_sprites/tile003.png', 'assets/snake_sprites/tile004.png', 'assets/snake_sprites/tile005.png');
+        this.enemy.addAnimation('left', 'assets/snake_sprites/tile015.png', 'assets/snake_sprites/tile016.png', 'assets/snake_sprites/tile017.png');
+        this.enemy.addAnimation('right', 'assets/snake_sprites/tile027.png', 'assets/snake_sprites/tile028.png', 'assets/snake_sprites/tile029.png');
+        this.enemy.addAnimation('up', 'assets/snake_sprites/tile039.png', 'assets/snake_sprites/tile040.png', 'assets/snake_sprites/tile041.png');
+
         this.current_angle = 0;
         this.speed = 0.9;
         this.health = 3;
@@ -30,7 +39,16 @@ class Enemy {
                 posible_angles[posible_angles.length * Math.random() | 0]
         }
         if (random() > 0.995) {
-            this.current_angle = this.current_angle + 90;
+            this.current_angle = (this.current_angle + 90) % 360;
+        }
+        if (this.current_angle === 0) {
+            this.enemy.changeAnimation('right');
+        } else if (this.current_angle === 90) {
+            this.enemy.changeAnimation('down');
+        } else if (this.current_angle === 180) {
+            this.enemy.changeAnimation('left');
+        } else if (this.current_angle === 270) {
+            this.enemy.changeAnimation('up');
         }
         this.enemy.setSpeed(this.speed, this.current_angle);
     }
