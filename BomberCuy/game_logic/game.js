@@ -24,6 +24,7 @@ function setup() {
     player = new Cuy();
     enemyGroup = new Group();
     enemyArr = new Array();
+    explosions = new Group();
     enemy1 = new Enemy(width - WALL_THICKNESS - 10, height - WALL_THICKNESS - 10);
     enemy2 = new Enemy(width - WALL_THICKNESS - 10, height - WALL_THICKNESS - 10);
     enemy3 = new Enemy(width - WALL_THICKNESS - 10, height - WALL_THICKNESS - 10);
@@ -44,13 +45,13 @@ function setup() {
     wallRight = createSprite(width + WALL_THICKNESS / 2, height / 2, WALL_THICKNESS, height);
     wallRight.immovable = true;
     wallTopU = createSprite(width / 2, -WALL_THICKNESS / 4, width + WALL_THICKNESS * 2, WALL_THICKNESS);
-    wallTop.immovable = true;
+    wallTopU.immovable = true;
     wallBottomU = createSprite(width / 2, height + WALL_THICKNESS / 4, width + WALL_THICKNESS * 2, WALL_THICKNESS);
-    wallBottom.immovable = true;
+    wallBottomU.immovable = true;
     wallLeftU = createSprite(-WALL_THICKNESS / 4, height / 2, WALL_THICKNESS, height);
-    wallLeft.immovable = true;
+    wallLeftU.immovable = true;
     wallRightU = createSprite(width + WALL_THICKNESS / 4, height / 2, WALL_THICKNESS, height);
-    wallRight.immovable = true;
+    wallRightU.immovable = true;
 }
 
 function draw() {
@@ -62,10 +63,24 @@ function draw() {
     enemy3.enemy_movement();
     enemy4.enemy_movement();
     player.check_collision();
+    if(explosions.length > 0){
+        player.check_explotion();
+        enemy1.check_explotion();
+        enemy2.check_explotion();
+        enemy3.check_explotion();
+        enemy4.check_explotion();
+        wallTop.overlap(explosions, removeExp);
+        wallBottom.overlap(explosions, removeExp);
+        wallLeft.overlap(explosions, removeExp);
+        wallRight.overlap(explosions, removeExp);
+    }
     drawSprites();
 }
 
 function keyPressed() {
     player.player_movement();
     player.player_bomb();
+}
+function removeExp(wall, explosion) {
+    explosion.remove();
 }

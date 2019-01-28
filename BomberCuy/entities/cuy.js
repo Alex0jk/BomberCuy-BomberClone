@@ -32,7 +32,7 @@ class Cuy {
         }
     }
     player_bomb() {
-        if (key == 'z') {
+        if (key === 'z' || key === 'Z') {
             if (plased_bomb == false) {
                 this.bomb = new Bomb(this.player.position.x, this.player.position.y);
             }
@@ -59,6 +59,10 @@ class Cuy {
         this.player.collide(wallBottomU);
         this.player.collide(wallLeftU);
         this.player.collide(wallRightU);
+        if (this.player.overlap(enemyGroup)) {
+            this.player.position.x = 50;
+            this.player.position.y = 50;
+        }
     }
     check_explotion() {
         if (this.player.overlap(explosions)) {
@@ -66,4 +70,5 @@ class Cuy {
             this.player.position.y = 50;
         }
     }
+
 }

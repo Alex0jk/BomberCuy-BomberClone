@@ -3,6 +3,7 @@ class Bomb {
         //bomb setup
         plased_bomb = true;
         this.bomb = createSprite(width / 2, height / 2, 50, 50);
+        this.bomb.addAnimation('normal', 'assets/bomb_sprites/bomb.gif');
         this.bomb.position.x = x;
         this.bomb.position.y = y;
         this.bomb.depth = 0;
