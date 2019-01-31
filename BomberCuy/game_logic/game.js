@@ -12,6 +12,7 @@ var enemy1;
 var enemy2;
 var enemy3;
 var enemy4;
+var map;
 
 function preload() {
     //Para la carga de assets al juego
@@ -21,14 +22,15 @@ function preload() {
 function setup() {
     //Para la inicializacion de todos los elementos del juego
     createCanvas(600, 600);
+    map = new Map(12,12)
     player = new Cuy();
     enemyGroup = new Group();
     enemyArr = new Array();
     explosions = new Group();
-    enemy1 = new Enemy(width - WALL_THICKNESS - 10, height - WALL_THICKNESS - 10);
-    enemy2 = new Enemy(width - WALL_THICKNESS - 10, height - WALL_THICKNESS - 10);
-    enemy3 = new Enemy(width - WALL_THICKNESS - 10, height - WALL_THICKNESS - 10);
-    enemy4 = new Enemy(width - WALL_THICKNESS - 10, height - WALL_THICKNESS - 10);
+    enemy1 = new Enemy(100,100);
+    enemy2 = new Enemy(100,100);
+    enemy3 = new Enemy(100, 100);
+    enemy4 = new Enemy(100,100);
 
     enemyGroup.add(enemy1.enemy);
     enemyGroup.add(enemy2.enemy);
@@ -73,6 +75,7 @@ function draw() {
         wallBottom.overlap(explosions, removeExp);
         wallLeft.overlap(explosions, removeExp);
         wallRight.overlap(explosions, removeExp);
+        map.blocks.overlap(explosions,removeExp);
     }
     drawSprites();
 }

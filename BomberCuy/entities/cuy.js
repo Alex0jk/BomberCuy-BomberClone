@@ -1,7 +1,7 @@
 class Cuy {
     constructor() {
         //la base
-        this.player = createSprite(50, 50, 50, 50);
+        this.player = createSprite(50, 50, width - 50, height - 50);
         //imagen estandar
         this.player.addAnimation('normal', 'assets/cuy_sprites/tile_idle_1.png');
         this.player.addAnimation('idle_left', 'assets/cuy_sprites/tile_idle_1.png');
@@ -59,15 +59,16 @@ class Cuy {
         this.player.collide(wallBottomU);
         this.player.collide(wallLeftU);
         this.player.collide(wallRightU);
+        this.player.collide(map.blocks);
         if (this.player.overlap(enemyGroup)) {
-            this.player.position.x = 50;
-            this.player.position.y = 50;
+            this.player.position.y = height - 50;
+            this.player.position.x = width - 50;
         }
     }
     check_explotion() {
         if (this.player.overlap(explosions)) {
-            this.player.position.x = 50;
-            this.player.position.y = 50;
+            this.player.position.y = height - 50;
+            this.player.position.x = width - 50;
         }
     }
 

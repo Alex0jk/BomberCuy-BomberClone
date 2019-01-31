@@ -38,6 +38,11 @@ class Enemy {
             this.current_angle =
                 posible_angles[posible_angles.length * Math.random() | 0]
         }
+        if(this.enemy.collide(map.blocks)){
+            let posible_angles = [270, 90, 180, 0];
+            this.current_angle =
+                posible_angles[posible_angles.length * Math.random() | 0]
+        }
         if (random() > 0.995) {
             this.current_angle = (this.current_angle + 90) % 360;
         }
