@@ -14,7 +14,7 @@ class Enemy {
         this.enemy.addAnimation('up', 'assets/snake_sprites/tile039.png', 'assets/snake_sprites/tile040.png', 'assets/snake_sprites/tile041.png');
 
         this.current_angle = 0;
-        this.speed = 0.9;
+        this.speed = (0.6 + level/3);
         this.health = 3;
         this.damage = 1;
     }
@@ -38,7 +38,7 @@ class Enemy {
             this.current_angle =
                 posible_angles[posible_angles.length * Math.random() | 0]
         }
-        if(this.enemy.collide(map.blocks)){
+        if (this.enemy.collide(map.blocks)) {
             let posible_angles = [270, 90, 180, 0];
             this.current_angle =
                 posible_angles[posible_angles.length * Math.random() | 0]
@@ -57,9 +57,11 @@ class Enemy {
         }
         this.enemy.setSpeed(this.speed, this.current_angle);
     }
-    check_explotion(){
+    check_explotion() {
         if (this.enemy.overlap(explosions)) {
             this.enemy.remove();
+            score = score + level * 100
+            enemy_count = enemy_count - 1;
         }
     }
 }

@@ -60,15 +60,13 @@ class Cuy {
         this.player.collide(wallLeftU);
         this.player.collide(wallRightU);
         this.player.collide(map.blocks);
-        if (this.player.overlap(enemyGroup)) {
-            this.player.position.y = height - 50;
-            this.player.position.x = width - 50;
-        }
+        
     }
     check_explotion() {
         if (this.player.overlap(explosions)) {
             this.player.position.y = height - 50;
             this.player.position.x = width - 50;
+            resetGame();
         }
     }
 
