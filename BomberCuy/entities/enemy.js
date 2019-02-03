@@ -1,8 +1,7 @@
 class Enemy {
 
     constructor(range_x, range_y) {
-        this.enemy = createSprite(random(range_x),
-            random(range_y), 40, 40);
+        this.enemy = createSprite(random(range_x),random(range_y), 40, 40);
         this.enemy.addAnimation('normal', 'assets/snake_sprites/tile_idle_f.png');
         this.enemy.addAnimation('idle_left', 'assets/snake_sprites/tile_idle_l.png');
         this.enemy.addAnimation('idle_right', 'assets/snake_sprites/tile_idle_r.png');

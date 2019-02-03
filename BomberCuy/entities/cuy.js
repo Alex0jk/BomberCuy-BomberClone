@@ -1,7 +1,7 @@
 class Cuy {
     constructor() {
         //la base
-        this.player = createSprite(50, 50, width - 50, height - 50);
+        this.player = createSprite(width - 50, width - 50, 30, 30);
         //imagen estandar
         this.player.addAnimation('normal', 'assets/cuy_sprites/tile_idle_1.png');
         this.player.addAnimation('idle_left', 'assets/cuy_sprites/tile_idle_1.png');
@@ -18,16 +18,16 @@ class Cuy {
     }
     player_movement() {
         if (keyCode == RIGHT_ARROW) {
-            this.player.setSpeed(1.5, 0);
+            this.player.setSpeed(1.75, 0);
             this.player.changeAnimation('right');
         } else if (keyCode == DOWN_ARROW) {
-            this.player.setSpeed(1.5, 90);
+            this.player.setSpeed(1.75, 90);
             this.player.changeAnimation('down');
         } else if (keyCode == LEFT_ARROW) {
-            this.player.setSpeed(1.5, 180);
+            this.player.setSpeed(1.75, 180);
             this.player.changeAnimation('left');
         } else if (keyCode == UP_ARROW) {
-            this.player.setSpeed(1.5, 270);
+            this.player.setSpeed(1.75, 270);
             this.player.changeAnimation('up');
         }
     }
@@ -60,13 +60,24 @@ class Cuy {
         this.player.collide(wallLeftU);
         this.player.collide(wallRightU);
         this.player.collide(map.blocks);
-        
+        this.player.overlap(power_ups.pups,removePu);
+        if (this.player.overlap(enemyGroup)) {
+            this.player.onLiveIsOver= new function(){
+                resetGame();
+            }
+            this.player.life=35;     
+        }
     }
     check_explotion() {
         if (this.player.overlap(explosions)) {
-            this.player.position.y = height - 50;
-            this.player.position.x = width - 50;
-            resetGame();
+            console.log(on_overlaping);
+            if(on_overlaping){
+                this.player.onLiveIsOver= new function(){
+                    resetGame();
+                }
+                this.player.remove();
+                on_overlaping=false;  
+            }
         }
     }
 
